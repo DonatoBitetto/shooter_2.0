@@ -5,6 +5,7 @@ import { Level } from "./Scenes/Level.js";
 new Game({
     width: 640,
     height: 360,
+    backgroundColor: '1FAB00',
     scene: Level,
     physics:{
         default: 'arcade',

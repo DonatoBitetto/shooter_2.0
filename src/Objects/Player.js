@@ -1,11 +1,14 @@
-import { Physics } from "phaser"
+import { Physics } from "phaser";
+import { Sword } from "../Objects/Sword";
 
 export class Player extends Physics.Arcade.Sprite {
 
     speed = 40;
+	
 
 	constructor(scene, x, y, texture = "player") {
 		super(scene, x, y, texture)
+
 		scene.add.existing(this)
 		scene.physics.add.existing(this)
 
@@ -66,6 +69,12 @@ export class Player extends Physics.Arcade.Sprite {
 			this.setVelocityX(0)
 			this.updateAnimation()
 		})
+
+		scene.input.on("pointerdown",(pointer)=>{
+			if(pointer.leftButtonDown()){
+				this.attack(pointer)
+			}
+		});
 	}
 
 	updateAnimation() {
@@ -74,5 +83,9 @@ export class Player extends Physics.Arcade.Sprite {
 		} else {
             this.play("idle", true);
 		}
+	}
+
+	attack(pointer){
+		new Sword(this.scene, this.x, this.y, "sword",pointer);
 	}
 }
