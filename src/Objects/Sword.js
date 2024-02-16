@@ -7,6 +7,7 @@ export class Sword extends Physics.Arcade.Sprite {
 		super(scene, x, y, texture);
 		scene.add.existing(this);
 		scene.physics.add.existing(this);
+		scene.attacks = [...scene.attacks,this];
 
 		if (!scene.anims.exists("sword")) {
 			scene.anims.create({
@@ -15,13 +16,13 @@ export class Sword extends Physics.Arcade.Sprite {
 					start: 0,
 					end: 2,
 				}),
-				frameRate: 6,
+				duration: 600,
 				repeat: -1,
 			});
 		}
 
+		
 		this.play("sword");
-
 
 		let angle = scene.physics.moveTo(this, pointer.x, pointer.y, this.speed);
         this.setRotation(angle);
@@ -29,5 +30,10 @@ export class Sword extends Physics.Arcade.Sprite {
 		setTimeout(() => {
 			this.destroy();
 		}, 2000);
+	}
+
+	die(){
+		this.scene.attacks.splice(this.scene.attacks.indexOf(this),1)
+		this.destroy();
 	}
 }
