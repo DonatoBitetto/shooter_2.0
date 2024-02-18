@@ -24,7 +24,7 @@ export class Sword extends Physics.Arcade.Sprite {
 		
 		this.play("sword");
 
-		let angle = scene.physics.moveTo(this, pointer.x, pointer.y, this.speed);
+		let angle = scene.physics.moveTo(this, pointer.worldX, pointer.worldY, this.speed);
         this.setRotation(angle);
 
 		setTimeout(() => {

@@ -11,6 +11,11 @@ export class Player extends Physics.Arcade.Sprite {
 
 		scene.add.existing(this)
 		scene.physics.add.existing(this)
+		
+		if(this.y > y+32){
+			console.log(this.y);
+			this.setVelocity(0)
+		}
 
 		scene.anims.create({
 			key: "idle",
@@ -32,7 +37,7 @@ export class Player extends Physics.Arcade.Sprite {
 			repeat: -1,
 		})
 
-		this.play("idle")
+		this.play("run")
 
 		scene.input.keyboard.on("keydown-S", () => {
 			this.setVelocityY(this.speed)
